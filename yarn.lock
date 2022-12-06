@@ -1885,7 +1885,7 @@ cheerio-select@^2.1.0:
     domhandler "^5.0.3"
     domutils "^3.0.1"
 
-cheerio@^1.0.0-rc.12:
+cheerio@^1.0.0-rc.3:
   version "1.0.0-rc.12"
   resolved "https://registry.npmjs.org/cheerio/-/cheerio-1.0.0-rc.12.tgz#788bf7466506b1c6bf5fae51d24a2c4d62e47683"
   integrity sha512-VqR8m68vM46BNnuZ5NtnGBKIE/DfN0cRIzg9n40EIq9NOv90ayxLBXA8fXC5gquFRGJSTRqBq25Jt2ECLR431Q==
@@ -2863,7 +2863,7 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
-figma-js@^1.16.0:
+figma-js@^1.6.1:
   version "1.16.0"
   resolved "https://registry.npmjs.org/figma-js/-/figma-js-1.16.0.tgz#84bfa6bf8dad25ba106b8b4ffa0d595bd6277e11"
   integrity sha512-cImQT9DAJp1J0xr6FMUAswXKEnjwrDz4QKAgIBpUyydKAgDS/lm862stjweHp99uco5qLoNv+GbwQWBHyDvDQw==

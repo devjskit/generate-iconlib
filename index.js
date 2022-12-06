@@ -8,14 +8,14 @@
 const path = require("path");
 const fs = require("fs-extra");
 require("ts-node").register({
-  ...fs.readJSONSync(path.resolve(__dirname, "tsconfig.json")),
+	...fs.readJSONSync(path.resolve(__dirname, "tsconfig.json")),
 });
 require("dotenv").config({
-  path: path.resolve(process.cwd(), ".env"),
+	path: path.resolve(process.cwd(), ".env"),
 });
 
 /*
 |-------------------------------------------------------------------------------
 | Start the CLI! Vroom vroom
 */
-require("./dist/cli.js");
+require("./src/cli.ts");
