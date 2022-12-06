@@ -1,5 +1,6 @@
-import { Canvas, Document, FileImageResponse, FileResponse } from 'figma-js';
-import { Headers, RequestInit } from 'node-fetch';
+import { Canvas, Document, FileImageResponse, FileResponse } from "figma-js";
+import { Headers, RequestInit } from "node-fetch";
+import * as path from "path";
 
 export class CodedError extends Error {
   public code: ERRORS;
@@ -14,12 +15,12 @@ export class CodedError extends Error {
 }
 
 export enum ERRORS {
-  NETWORK_OFFLINE = 'NETWORK_OFFLINE',
-  DIRTY_WORKING_DIR = 'DIRTY_WORKING_DIR',
-  UNEXPECTED = 'UNEXPECTED',
-  NO_ICONS_PAGE = 'NO_ICONS_PAGE',
-  NO_ICONS_IN_SETS = 'NO_ICONS_IN_SETS',
-  FIGMA_API = 'FIGMA_API',
+  NETWORK_OFFLINE = "NETWORK_OFFLINE",
+  DIRTY_WORKING_DIR = "DIRTY_WORKING_DIR",
+  UNEXPECTED = "UNEXPECTED",
+  NO_ICONS_PAGE = "NO_ICONS_PAGE",
+  NO_ICONS_IN_SETS = "NO_ICONS_IN_SETS",
+  FIGMA_API = "FIGMA_API",
 }
 
 export interface IFigmaConfig {
@@ -76,5 +77,5 @@ interface ErrorResponse {
 }
 export interface IFigmaCanvas extends Canvas {}
 export interface IFigmaDocument extends Document {}
-export interface IFigmaFileImageResponse extends Omit<FileImageResponse, 'err' | 'status'>, ErrorResponse {}
+export interface IFigmaFileImageResponse extends Omit<FileImageResponse, "err" | "status">, ErrorResponse {}
 export interface IFigmaFileResponse extends FileResponse, ErrorResponse {}

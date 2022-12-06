@@ -1,6 +1,7 @@
-import path from 'path';
-import meow from 'meow';
-import { CodedError, ERRORS } from './types';
+import path from "path";
+import meow from "meow";
+import chalk from "chalk";
+import { CodedError, ERRORS } from "./types";
 import {
   generateReactComponents,
   generateIconManifest,
@@ -13,9 +14,9 @@ import {
   getIconsPage,
   prechecks,
   getIcons,
-} from './services';
-import { handleError } from './utils';
-import { render, unmount } from './view';
+} from "./services";
+import { handleError } from "./utils";
+import { render, unmount } from "./view";
 
 async function main() {
   await prechecks();
@@ -35,8 +36,8 @@ async function main() {
       hardRejection: false,
       flags: {
         file: {
-          type: 'string',
-          alias: 'f',
+          type: "string",
+          alias: "f",
         },
       },
     }
@@ -51,12 +52,12 @@ async function main() {
 
   /* 1. Request the figma document, to source all visual nodes */
   render({
-    spinners: [{ text: 'Finding the file in Figma...' }],
+    spinners: [{ text: "Finding the file in Figma..." }],
   });
 
   const document = await getFigmaDocument(figmaConfig);
   render({
-    spinners: [{ success: true, text: 'Found the Figma file 👌' }, { text: 'Finding all Icons in the designs...' }],
+    spinners: [{ success: true, text: "Found the Figma file 👌" }, { text: "Finding all Icons in the designs..." }],
   });
 
   /* 2. Filter nodes for our Icons page */
@@ -80,7 +81,7 @@ async function main() {
 
   /* 4. Request Figma services to render Icon nodes as individual SVGs */
   render({
-    spinners: [{ text: 'Rendering on the Figma platform...' }],
+    spinners: [{ text: "Rendering on the Figma platform..." }],
   });
   const iconSvgUrls = await renderIdsToSvgs(iconIds, figmaConfig);
 
@@ -89,11 +90,11 @@ async function main() {
     spinners: [
       {
         success: true,
-        text: 'Rendered Icons on the Figma platform 🙌',
+        text: "Rendered Icons on the Figma platform 🙌",
       },
     ],
     progress: {
-      text: 'Gathering Figma renders...',
+      text: "Gathering Figma renders...",
       percent: 0,
     },
   });
@@ -103,7 +104,7 @@ async function main() {
     downloadsCompleted += 1;
     render({
       progress: {
-        text: 'Gathering Figma renders...',
+        text: "Gathering Figma renders...",
         percent: downloadsCompleted / iconIds.length,
       },
     });
@@ -113,10 +114,10 @@ async function main() {
     spinners: [
       {
         success: true,
-        text: 'Downloaded and processed SVG renders 👍',
+        text: "Downloaded and processed SVG renders 👍",
       },
       {
-        text: 'Generating React Components...',
+        text: "Generating React Components...",
       },
     ],
   });
@@ -129,10 +130,10 @@ async function main() {
     spinners: [
       {
         success: true,
-        text: 'Created React Components ⚛️ ✨',
+        text: "Created React Components ⚛️ ✨",
       },
       {
-        text: 'Generating Icon Manifest...',
+        text: "Generating Icon Manifest...",
       },
     ],
   });
@@ -145,10 +146,10 @@ async function main() {
     spinners: [
       {
         success: true,
-        text: 'Created Icon Manifest 📓 🔥',
+        text: "Created Icon Manifest 📓 🔥",
       },
       {
-        text: 'Applying changes...',
+        text: "Applying changes...",
       },
     ],
   });
@@ -160,7 +161,7 @@ async function main() {
     spinners: [
       {
         success: true,
-        text: 'Applied changes to working directory 💇‍',
+        text: "Applied changes to working directory 💇‍",
       },
     ],
   });
@@ -180,8 +181,8 @@ async function main() {
 
 main()
   .then(() => {
-    console.log('Bai 👋');
+    console.log("Bai 👋");
   })
-  .catch((err) => handleError(err));
+  .catch(err => handleError(err));
 
-process.addListener('unhandledRejection', (err) => handleError(err));
+process.addListener("unhandledRejection", err => handleError(err));

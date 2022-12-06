@@ -1,22 +1,22 @@
-import { CodedError, ERRORS, RequestInitWithRetry } from './types';
-import nodeFetch, { Response } from 'node-fetch';
-import isOnline from 'is-online';
-import * as _ from 'lodash';
-import SVGO from 'svgo';
-import { unmount } from './view';
-import chalk from 'chalk';
+import { CodedError, ERRORS, RequestInitWithRetry } from "./types";
+import nodeFetch, { Response } from "node-fetch";
+import isOnline from "is-online";
+import * as _ from "lodash";
+import SVGO from "svgo";
+import { unmount } from "./view";
+import chalk from "chalk";
 
 export function handleError(err, exit = true) {
   unmount();
-  console.log('');
+  console.log("");
   if (err instanceof CodedError) {
     console.error(
-      `${chalk.red.bold('ERROR: ')}${chalk.bgRed.black.bold.inverse(` ${err.code} `)}
+      `${chalk.red.bold("ERROR: ")}${chalk.bgRed.black.bold.inverse(` ${err.code} `)}
 ${err.message}
-${chalk.dim(!(err.hideStack && err.stack) ? err.stack.replace(/^.*\n/, '') : '')}`.trim()
+${chalk.dim(!(err.hideStack && err.stack) ? err.stack.replace(/^.*\n/, "") : "")}`.trim()
     );
   } else {
-    console.log(`${chalk.red.bold('ERROR: ')}${chalk.bgRed.black.bold.inverse(' UNHANDLED ')}\n`);
+    console.log(`${chalk.red.bold("ERROR: ")}${chalk.bgRed.black.bold.inverse(" UNHANDLED ")}\n`);
     console.error(err);
   }
 
@@ -37,10 +37,10 @@ export function fetch(url: string, fetchOptions: RequestInitWithRetry = {}): Pro
   return new Promise((resolve, reject) => {
     const attemptFetch = (remainingRetries: number) => {
       nodeFetch(url, fetchOptions)
-        .then((res) => {
+        .then(res => {
           resolve(res);
         })
-        .catch(async (err) => {
+        .catch(async err => {
           if (remainingRetries > 0) {
             await asyncDelay(retryOptions.delay);
             attemptFetch(--remainingRetries);
@@ -52,7 +52,7 @@ export function fetch(url: string, fetchOptions: RequestInitWithRetry = {}): Pro
             currentOnlineCheck = null;
             if (!isOn) {
               reject(
-                new CodedError(ERRORS.NETWORK_OFFLINE, 'An internet connection is required to find and render Icons.')
+                new CodedError(ERRORS.NETWORK_OFFLINE, "An internet connection is required to find and render Icons.")
               );
             } else {
               reject(err);
@@ -66,7 +66,7 @@ export function fetch(url: string, fetchOptions: RequestInitWithRetry = {}): Pro
 }
 
 function asyncDelay(timeout: number) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve();
     }, timeout);
@@ -77,10 +77,10 @@ export function pushObjLeafNodesToArr(obj: {}, arr: string[], accessor: any[] = 
   _.forEach(accessor.length ? _.get(obj, accessor) : obj, (v, k) => {
     if (v == null) return;
     const currentAccessor = accessor.concat(k);
-    if (typeof v === 'object') {
+    if (typeof v === "object") {
       pushObjLeafNodesToArr(obj, arr, currentAccessor);
     }
-    if (typeof v === 'string') {
+    if (typeof v === "string") {
       arr.push(_.get(obj, currentAccessor));
     }
   });
