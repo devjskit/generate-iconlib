@@ -1,15 +1,17 @@
 {
   "private": false,
   "name": "@whatskit/generate-iconlib",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "author": "billgo",
   "description": "generate iconlib",
   "prettier": "prettier-config-whatskit",
   "bin": {
-    "generate-iconlib": "./index.js"
+    "generate-iconlib": "./dist/cli.js"
   },
-  "main": "index.js",
+  "module": "dist/cli.mjs",
+  "types": "dist/cli.d.ts",
+  "main": "dist/cli.js",
   "files": [
     "dist",
     "src"
